@@ -176,7 +176,8 @@ const Hero = () => {
               className="group runner-reverse-hover relative overflow-hidden z-10 cursor-pointer font-semibold text-white px-5 sm:px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-600 via-blue-600 to-rose-500 hover:brightness-110 transition-all duration-300 inline-flex items-center gap-2 shadow-lg shadow-cyan-500/25"
               onClick={() =>
                 window.open(
-                  "https://drive.google.com/file/d/1YFowX1RuK_f2Zg6f5KsB7sHmmAfOKDsn/view?usp=sharing"
+                  "https://drive.google.com/file/d/1m_UvhX2m9K_EdZ1r17VFslxE8CdCA_Uc/view?usp=sharing",
+                  "_blank"
                 )
               }
             >

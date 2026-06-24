@@ -55,7 +55,7 @@ const Contact = () => {
                 <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300">Years Exp</p>
               </div>
               <div className="rounded-lg bg-amber-500/10 border border-amber-500/25 p-3 text-center">
-                <p className="text-xl md:text-xl font-bold text-amber-700 dark:text-amber-300">GenAI + AgeticAI </p>
+                <p className="text-xl md:text-xl font-bold text-amber-700 dark:text-amber-300">GenAI + AgenticAI </p>
                 <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300">Current Focus</p>
               </div>
             </div>
