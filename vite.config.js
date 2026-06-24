@@ -13,4 +13,35 @@ const base = process.env.GITHUB_ACTIONS
 export default defineConfig({
   plugins: [react()],
   base,
+  build: {
+    target: "es2019",
+    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) {
+            return;
+          }
+
+          if (id.includes("react") || id.includes("react-dom") || id.includes("scheduler")) {
+            return "react-vendor";
+          }
+
+          if (id.includes("framer-motion")) {
+            return "motion";
+          }
+
+          if (id.includes("@tsparticles") || id.includes("tsparticles")) {
+            return "particles";
+          }
+
+          if (id.includes("react-icons")) {
+            return "icons";
+          }
+
+          return "vendor";
+        },
+      },
+    },
+  },
 });

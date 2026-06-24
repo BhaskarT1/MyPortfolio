@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect, useState } from "react";
-import profilepic from "../assets/profpic.png";
+import profilepicWebp from "../assets/profpic.webp";
 import { TypeAnimation } from "react-type-animation";
 import ShinyEffect from "./ShinyEffect";
 
@@ -274,7 +274,7 @@ const Hero = () => {
               </div>
             )}
             <img
-              src={profilepic}
+              src={profilepicWebp}
               alt="Bhaskar Tikale portrait"
               loading="eager"
               fetchpriority="high"
