@@ -55,7 +55,9 @@ const Contact = () => {
                 <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300">Years Exp</p>
               </div>
               <div className="rounded-lg bg-amber-500/10 border border-amber-500/25 p-3 text-center">
-                <p className="text-xl md:text-xl font-bold text-amber-700 dark:text-amber-300">GenAI + AgenticAI </p>
+                <p className="text-[11px] sm:text-sm md:text-lg font-bold leading-tight text-amber-700 dark:text-amber-300 break-words">
+                  Gen + AgenticAI
+                </p>
                 <p className="text-xs md:text-sm text-slate-600 dark:text-slate-300">Current Focus</p>
               </div>
             </div>
@@ -91,6 +93,11 @@ const Contact = () => {
               id="name"
               placeholder="Your full name"
               name="name"
+              autoComplete="name"
+              required
+              minLength={2}
+              maxLength={60}
+              title="Please enter your name (2 to 60 characters)."
               className="mb-3 w-full rounded-lg border text-slate-900 dark:text-black border-cyan-500/50 py-3 px-3 bg-white dark:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/40"
             />
             <label
@@ -104,6 +111,10 @@ const Contact = () => {
               id="email"
               placeholder="you@example.com"
               name="email"
+              autoComplete="email"
+              required
+              maxLength={120}
+              title="Please enter a valid email address."
               className="mb-3 w-full rounded-lg border text-slate-900 dark:text-black border-cyan-500/50 py-3 px-3 bg-white dark:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/40"
             />
             <label
@@ -118,6 +129,10 @@ const Contact = () => {
               cols="30"
               rows="4"
               placeholder="Tell me about your project"
+              required
+              minLength={12}
+              maxLength={1200}
+              title="Please enter at least 12 characters in your message."
               className="mb-3 w-full rounded-lg border text-slate-900 dark:text-black border-cyan-500/50 py-3 px-3 bg-white dark:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-cyan-500/40"
             />
             <button
