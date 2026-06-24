@@ -4,7 +4,7 @@ import Experience from "./components/Experience";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
-import Portfolio from "./components/Portfolio";
+// import Portfolio from "./components/Portfolio";
 import Skills from "./components/Skills";
 import Services from "./components/Services";
 import Testimonials from "./components/Testimonials";
@@ -24,6 +24,7 @@ export default function App() {
   useEffect(() => {
     const root = document.documentElement;
     root.classList.toggle("dark", theme === "dark");
+    root.style.colorScheme = theme;
     localStorage.setItem("theme", theme);
   }, [theme]);
 
@@ -42,7 +43,7 @@ export default function App() {
         <Hero />
         <Skills />
         <Services />
-        <Portfolio />
+        {/* <Portfolio /> */}
         <Experience />
         <Testimonials />
         <Contact />

@@ -27,6 +27,10 @@ body {
   scroll-behavior: smooth;
 }
 
+html {
+  background-color: var(--bg-color);
+}
+
 h2 {
   @apply text-xl md:text-4xl font-bold;
   color: var(--heading-color);
@@ -49,6 +53,115 @@ p {
   @apply bg-slate-700 dark:bg-[#112240];
 }
 
-* {
-  transition: border-color 220ms ease, background-color 220ms ease, color 220ms ease;
+@keyframes runner-x {
+  from {
+    transform: translateX(-130%);
+  }
+  to {
+    transform: translateX(430%);
+  }
+}
+
+@keyframes runner-y {
+  from {
+    transform: translateY(-130%);
+  }
+  to {
+    transform: translateY(430%);
+  }
+}
+
+@keyframes runner-x-rev {
+  from {
+    transform: translateX(130%);
+  }
+  to {
+    transform: translateX(-430%);
+  }
+}
+
+@keyframes runner-y-rev {
+  from {
+    transform: translateY(130%);
+  }
+  to {
+    transform: translateY(-430%);
+  }
+}
+
+@layer components {
+  .runner-reverse-hover:hover .runner-x,
+  .group:hover .runner-x {
+    animation-direction: reverse;
+  }
+
+  .runner-reverse-hover:hover .runner-y,
+  .group:hover .runner-y {
+    animation-direction: reverse;
+  }
+
+  .runner-reverse-hover:hover .runner-x-rev,
+  .group:hover .runner-x-rev {
+    animation-direction: reverse;
+  }
+
+  .runner-reverse-hover:hover .runner-y-rev,
+  .group:hover .runner-y-rev {
+    animation-direction: reverse;
+  }
+
+  .runner-x {
+    animation: runner-x 2.4s linear infinite;
+  }
+
+  .runner-y {
+    animation: runner-y 2.4s linear infinite;
+  }
+
+  .runner-x-rev {
+    animation: runner-x-rev 2.4s linear infinite;
+  }
+
+  .runner-y-rev {
+    animation: runner-y-rev 2.4s linear infinite;
+  }
+
+  .nav-link {
+    @apply relative cursor-pointer px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 transition-all duration-200 hover:text-cyan-700 dark:hover:text-cyan-300 hover:bg-cyan-500/10;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.35rem;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #06b6d4 0%, #3b82f6 50%, #fb7185 100%);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 220ms ease;
+  }
+
+  .nav-link:hover::after,
+  .nav-active::after {
+    transform: scaleX(1);
+  }
+
+  .nav-active {
+    @apply text-cyan-700 dark:text-cyan-300 bg-cyan-500/10;
+  }
+
+  .nav-icon-btn {
+    @apply inline-flex items-center justify-center h-10 w-10 rounded-xl border border-slate-300/80 dark:border-slate-700/90 text-slate-700 dark:text-slate-200 bg-white/80 dark:bg-slate-900/70 hover:bg-cyan-500/10 dark:hover:bg-cyan-400/10 hover:border-cyan-400/60 transition-colors duration-200;
+  }
+
+  .nav-link-mobile {
+    @apply block text-xl font-semibold rounded-xl px-4 py-3 text-slate-800 dark:text-slate-200 bg-slate-100/70 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 transition-all duration-200 hover:border-cyan-400/60 hover:text-cyan-700 dark:hover:text-cyan-300;
+  }
+
+  .nav-active-mobile {
+    @apply text-cyan-700 dark:text-cyan-300 border-cyan-400/70 bg-cyan-500/10;
+  }
 }

@@ -2,8 +2,38 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-   <link rel="shortcut icon" href="/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/icon.png" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <style>
+      html,
+      body {
+        background: #f8fafc;
+        color: #0f172a;
+      }
+
+      html.dark,
+      html.dark body {
+        background: #0a192f;
+        color: #e0f2f1;
+      }
+    </style>
+    <script>
+      (function () {
+        try {
+          var storedTheme = localStorage.getItem("theme");
+          var isDark =
+            storedTheme === "dark" ||
+            (storedTheme !== "light" &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+          document.documentElement.classList.toggle("dark", isDark);
+          document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+        } catch (error) {
+          // Ignore storage/media-query failures and fall back to light mode.
+        }
+      })();
+    </script>
     <title>My Portfolio</title>
   </head>
   <body>

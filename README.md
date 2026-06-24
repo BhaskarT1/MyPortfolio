@@ -7,3 +7,14 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 # MyPortfolio
+
+## Deploy On GitHub Pages (GitHub Actions)
+
+1. Push this project to GitHub and keep your default deployment branch as `main`.
+2. In repository settings, open `Pages` and set Source to `GitHub Actions`.
+3. Push any commit to `main` (or run the `Deploy To GitHub Pages` workflow manually).
+4. Your site will be published automatically after the workflow succeeds.
+
+The Vite base path is now computed automatically during Actions builds, so it works for both:
+- user/org pages (`<username>.github.io`)
+- project pages (`<username>.github.io/<repo>/`)
