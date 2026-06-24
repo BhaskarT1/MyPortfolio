@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import profilepic from "../assets/profpic.png";
 import { TypeAnimation } from "react-type-animation";
 import ShinyEffect from "./ShinyEffect";
-import SparkleField from "./SparkleField";
 
 
 import {
@@ -44,6 +43,8 @@ import {
 import { FaAws } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { HashLoader } from "react-spinners";
+
+const SparkleField = lazy(() => import("./SparkleField"));
 
 const Hero = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -117,7 +118,9 @@ const Hero = () => {
     <section className="pt-28 md:pt-36 pb-14 max-w-[1200px] mx-auto px-4 sm:px-6 relative" id="home">
       <div className="pointer-events-none absolute inset-0 rounded-3xl overflow-hidden">
         <div className="absolute inset-0 opacity-100 dark:opacity-95">
-          <SparkleField />
+          <Suspense fallback={null}>
+            <SparkleField />
+          </Suspense>
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/5 to-white/10 dark:from-slate-950/0 dark:via-slate-950/6 dark:to-slate-950/14" />
       </div>

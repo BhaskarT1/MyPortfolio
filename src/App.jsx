@@ -16,9 +16,7 @@ export default function App() {
       return storedTheme;
     }
 
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
+    return "dark";
   });
 
   useEffect(() => {

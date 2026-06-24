@@ -6,20 +6,42 @@ const SparkleField = () => {
   const [isDark, setIsDark] = useState(() =>
     document.documentElement.classList.contains("dark")
   );
+  const [isSmallScreen, setIsSmallScreen] = useState(() => window.innerWidth < 768);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
 
   useEffect(() => {
     const root = document.documentElement;
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     const updateTheme = () => {
       setIsDark(root.classList.contains("dark"));
     };
 
+    const updateViewport = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+
+    const updateMotionPreference = () => {
+      setPrefersReducedMotion(motionQuery.matches);
+    };
+
     updateTheme();
+    updateViewport();
+    updateMotionPreference();
 
     const observer = new MutationObserver(updateTheme);
     observer.observe(root, { attributes: true, attributeFilter: ["class"] });
 
-    return () => observer.disconnect();
+    window.addEventListener("resize", updateViewport);
+    motionQuery.addEventListener("change", updateMotionPreference);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateViewport);
+      motionQuery.removeEventListener("change", updateMotionPreference);
+    };
   }, []);
 
   const init = useCallback(async (engine) => {
@@ -31,10 +53,12 @@ const SparkleField = () => {
       fullScreen: { enable: false },
       background: { color: { value: "transparent" } },
       detectRetina: true,
-      fpsLimit: 60,
+      pauseOnBlur: true,
+      pauseOnOutsideViewport: true,
+      fpsLimit: prefersReducedMotion ? 30 : isSmallScreen ? 40 : 60,
       particles: {
         number: {
-          value: isDark ? 42 : 54,
+          value: prefersReducedMotion ? 14 : isSmallScreen ? (isDark ? 26 : 32) : isDark ? 42 : 54,
           density: { enable: true, width: 1200, height: 900 },
         },
         color: {
@@ -47,15 +71,22 @@ const SparkleField = () => {
         },
         size: { value: isDark ? { min: 1.1, max: 3.5 } : { min: 1.3, max: 4.2 } },
         move: {
-          enable: true,
-          speed: isDark ? { min: 0.2, max: 0.72 } : { min: 0.24, max: 0.86 },
+          enable: !prefersReducedMotion,
+          speed:
+            prefersReducedMotion
+              ? { min: 0, max: 0 }
+              : isSmallScreen
+              ? { min: 0.14, max: 0.45 }
+              : isDark
+              ? { min: 0.2, max: 0.72 }
+              : { min: 0.24, max: 0.86 },
           direction: "none",
           random: true,
           straight: false,
           outModes: { default: "out" },
         },
         links: {
-          enable: true,
+          enable: !prefersReducedMotion && !isSmallScreen,
           distance: isDark ? 145 : 155,
           opacity: isDark ? 0.2 : 0.28,
           color: isDark ? "#67e8f9" : "#0284c7",
@@ -66,7 +97,7 @@ const SparkleField = () => {
         detectsOn: "canvas",
         events: {
           onHover: {
-            enable: true,
+            enable: !prefersReducedMotion && !isSmallScreen,
             mode: "grab",
           },
           resize: { enable: true },
@@ -79,7 +110,7 @@ const SparkleField = () => {
         },
       },
     }),
-    [isDark]
+    [isDark, isSmallScreen, prefersReducedMotion]
   );
 
   return (
